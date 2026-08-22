@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحبك يا جيجي ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fdfbf7;
+            color: #292929;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* شاشة كلمة السر */
+        #pass-screen {
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 380px;
+            width: 100%;
+            border: 1px solid #f0eae1;
+            z-index: 100;
+        }
+
+        #pass-screen h1 {
+            color: #d32f2f;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        #pass-screen p {
+            color: #757575;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            background: #fafafa;
+            color: #333;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            display: none;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* العنوان المقدمة المتحرك المزخرف الجديد */
+        .intro-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e63946;
+            margin-bottom: 20px;
+            display: inline-block;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(230, 57, 70, 0.15);
+            animation: pulseGlow 2.5s infinite ease-in-out;
+            direction: ltr; /* لضمان ظهور الإنجليزية بشكل صحيح */
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.03); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f3eee7;
+            text-align: right;
+            line-height: 1.9;
+            color: #333;
+            font-size: 0.98rem;
+            margin-bottom: 25px;
+        }
+
+        .card p {
+            margin-bottom: 16px;
+        }
+
+        .highlight-title {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* كروت الصور */
+        .photo-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f3eee7;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .photo-card img {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .photo-card .caption {
+            color: #555;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* قسم الأغاني */
+        .music-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #f3eee7;
+            margin-bottom: 25px;
+            text-align: right;
+        }
+
+        .music-section h3 {
+            font-size: 1.1rem;
+            color: #d32f2f;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .track {
+            margin-bottom: 15px;
+        }
+
+        .track label {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+        }
+
+        .divider {
+            margin: 20px 0;
+            color: #d32f2f;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+            margin: 0 10px;
+        }
+
+        /* تأثير القلوب الطائرة الصغيرة */
+        .heart {
+            position: fixed;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.6); opacity: 0.9; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة كلمة السر -->
+    <div id="pass-screen">
+        <div style="font-size: 32px; margin-bottom: 10px;">❤️</div>
+        <h1>في حاجة صغيرة ليكي</h1>
+        <p>بس مش هتفتح غير بكلمة السر 👀</p>
+        <input type="password" id="passInput" placeholder="اكتبي كلمة السر">
+        <button class="btn" onclick="checkPass()">افتحي المفاجأة ✨</button>
+        <p id="error-msg" style="color: #d32f2f; margin-top: 10px; display: none;">كلمة السر غلط يا جوجتي، جربي تاني! 😅</p>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="main-content">
+        
+        <!-- المقدمة المعدلة -->
+        <div class="intro-title">my love Jojti 💗💗</div>
+
+        <!-- كارت الرسالة الخاصة -->
+        <div class="card">
+            <p>جوجتي حبيبتي، حبيت أقولك إنك أجمل حاجة حصلتلي في حياتي، وأجمل بنوتة عرفتها في حياتي. قربنا نكمل الـ 3 سنين مع بعض ❤️</p>
+            
+            <p>حبيتك كأنك بنتي، كأنك أعز ما ليا والله، وحبيت كل لحظة عشتها معاكي رغم كل المشاكل اللي كانت بتحصل وغالباً بسببي، بس ده كان بيبقى غصب عني لأني ببقى محتاج أكلمك.</p>
+            
+            <p>إحنا العلاقة اللي مفيش حد زينا عاشها بتفاصيلها، إحنا اللي صبرنا واتحملنا الخناقات والمشاكل، وبالذات أنتِ تعبتي أوي بسبب المشاكل بس لحد الآن أنتِ معايا. عارفة ليه؟ لأنك بتحبيني بجد زي ما بحبك، بتحبي كل لحظة عشناها سوا سواء كانت حلوة أو وحشة. أنا بكتبلك الكلام ده من كل قلبي وربنا يخليكي ليا يا جوجتي ❤️🥺</p>
+
+            <div class="divider">🌸</div>
+
+            <p>كل الناس شايفه إن ده سن مراهقة ومش حب حقيقي مع إن ده غلط.</p>
+            
+            <p>عايز أقولك إن بعدك عني هي الحاجة اللي بتوجع قلبي والله، وكلمة "وحشاني" دي قليلة على اللي بحس بيه وأنتِ بعيدة عني. كل حاجة بينا بتفكرني بيكي؛ صوتك وصورك اللي محتفظ بيها 🥹💗 ونكدك وهزارك معايا وعصبيتك اللي مبحبش غيرها.. كل حاجة فيكي بعشقها!</p>
+            
+            <p>يمكن عمري ما كنت أتقبل إني أحب حد في السن ده بس ربنا أراد كده، وأنا عمري ما هبعد ولا هنساكي ولا هسيبك تبعدي عني لحظة واحدة أصلاً غير على موتي. ولو حصل اعرفي إني انتهيت ومش أقدر أعيش من غيرك يوم واحد. وجعي عليكي بيبقى أكبر من وجعي على أي حد سابني ومشي، لأن أنتِ الدنيا اللي بحلم بيها 🥹 القمر اللي في حياتي وعمري ما هقدر أكرهك مهما عملتي ومهما حصل ❤️❤️</p>
+
+            <div class="divider">❤️</div>
+
+            <span class="highlight-title">(عايز أقولك حاجة أخيرة كده)</span>
+            <p style="margin-top: 5px;">ربنا يوفقك وتنجحي في حياتك ونبقى جنب بعض دايماً نكون لبعض وبس، لأنك أغلى حد في حياتي كلها عامةً ✨</p>
+        </div>
+
+        <!-- 5 كروت للصور -->
+        <div class="photo-card">
+            <img src="photo1.jpg" alt="صورة 1">
+            <div class="caption">حياتي كدا كدا الي مقدرش اعيش من غيرها لحظه ❤️</div>
+        </div>
+
+        <div class="photo-card">
+            <img src="photo2.jpg" alt="صورة 2">
+            <div class="caption">لا لا كل جمالك ده ليا انا بس🥹 ✨</div>
+        </div>
+
+        <div class="photo-card">
+            <img src="photo3.jpg" alt="صورة 3">
+            <div class="caption">اي القمر ده يناس💗 🥺</div>
+        </div>
+
+        <div class="photo-card">
+            <img src="photo4.jpg" alt="صورة 4">
+            <div class="caption">بنوتي حبيتي الي بموووت فيهاا🥹 🤍</div>
+        </div>
+
+        <div class="photo-card">
+            <img src="photo5.jpg" alt="صورة 5">
+            <div class="caption">مين التحفه الفنيه دي 💞</div>
+        </div>
+
+        <!-- قسم الـ 5 أغاني -->
+        <div class="music-section">
+            <h3>🎵 الأغاني اللي بتحبيها</h3>
+            
+            <div class="track">
+                <label>الأغنية الأولى:</label>
+                <audio controls preload="none">
+                    <source src="song1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="track">
+                <label>الأغنية الثانية:</label>
+                <audio controls preload="none">
+                    <source src="song2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="track">
+                <label>الأغنية الثالثة:</label>
+                <audio controls preload="none">
+                    <source src="song3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="track">
+                <label>الأغنية الرابعة:</label>
+                <audio controls preload="none">
+                    <source src="song4.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="track">
+                <label>الأغنية الخامسة:</label>
+                <audio controls preload="none">
+                    <source src="song5.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div style="color: #888; font-size: 0.9rem; margin-bottom: 35px;">
+            ربنا يخليكي ليا ويحفظك دايمًا ❤️
+        </div>
+
+    </div>
+
+    <script>
+        function checkPass() {
+            const secretPass = "My addiction";
+            const input = document.getElementById("passInput").value;
+            
+            if (input === secretPass) {
+                document.getElementById("pass-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+                startHearts();
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+            }
+        }
+
+        // إنشاء القلوب الطائرة
+        function startHearts() {
+            const heartIcons = ['❤️', '💖', '💕', '💗', '💌'];
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 10 + 12) + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
